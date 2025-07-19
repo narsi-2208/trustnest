@@ -1,8 +1,16 @@
 from django.contrib import admin
-from .models import Mentor, CareerSwitcher, User
+from .models import User, Helper
 
-admin.site.register(Mentor)
-admin.site.register(CareerSwitcher)
-admin.site.register(User)
-admin.site.site_header = "BL-Task Admin"
+@admin.register(User)
+class UserAdmin(admin.ModelAdmin):
+    list_display = ('full_name', 'email', 'phone', 'location')
+    search_fields = ('full_name', 'email', 'phone', 'location')
+
+@admin.register(Helper)
+class HelperAdmin(admin.ModelAdmin):
+    list_display = ('full_name', 'email', 'phone', 'gender', 'age', 'location', 'experience_years', 'rating')
+    search_fields = ('full_name', 'email', 'phone', 'location', 'skills', 'languages')
+    list_filter = ('gender', 'location', 'experience_years')
+    ordering = ('-rating',)
+
 
