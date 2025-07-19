@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Sign Up as Career Switcher - SkillSwitch</title>
+  <link rel="stylesheet" href="{% static 'users/styles.css' %}" /> />
+</head>
+<body>
+  <h2>Find Your Mentor</h2>
+  <form method="post">
+    {% csrf_token %}
+    <label>Full Name:</label>
+    <input type="text" name="full_name" required />
+
+    <label>Email:</label>
+    <input type="email" name="email" required />
+
+    <label>Password:</label>
+    <input type="password" name="password" required />
+
+    <label>Your Current Background:</label>
+    <input type="text" name="background" placeholder="e.g., B.Tech Civil" required />
+
+    <label>Target Role:</label>
+    <input type="text" name="target_role" placeholder="e.g., Frontend Developer" required />
+
+    <label>Why do you want to switch?</label>
+    <textarea name="reason" required></textarea>
+
+    <button type="submit">Sign Up</button>
+  </form>
+</body>
+</html>

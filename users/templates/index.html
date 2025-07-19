@@ -1,0 +1,86 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SkillSwitch - Career Mentor Directory</title>
+  <link rel="stylesheet" href="{% static 'users/styles.css' %}" />
+  <style>
+    .mentor-card {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 16px;
+      margin: 16px 0;
+      background-color: #fdfdfd;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .mentor-card h3 {
+      margin: 0 0 8px;
+    }
+
+    .mentor-card p {
+      margin: 4px 0;
+    }
+
+    .mentor-card a {
+      display: inline-block;
+      margin-top: 8px;
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .mentor-listings {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">
+      <img src="{% static 'assets/logo.png' %}" alt="SkillSwitch Logo" />
+      <h1>SkillSwitch</h1>
+    </div>
+    <div class="search-login">
+      <input type="text" placeholder="Search mentors..." />
+      <a href="{% url 'login' %}">Login</a>
+      <a href="{% url 'signup_consumer' %}">Sign Up</a>
+    </div>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#">Browse Mentors</a></li>
+      <li><a href="#">Career Paths</a></li>
+      <li><a href="#">FAQs</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section>
+      <h2>Find a Mentor Who’s Been There</h2>
+      <p>From B.Com to Business Analyst? BTech Mech to Frontend Dev? We’ve got a guide who did exactly that.</p>
+    </section>
+
+    <section class="mentor-listings">
+      <h2>Available Mentors</h2>
+      {% for mentor in mentors %}
+        <div class="mentor-card">
+          <h3>{{ mentor.full_name }}</h3>
+          <p><strong>Current Role:</strong> {{ mentor.current_role }}</p>
+          <a href="{% url 'mentor_detail' mentor.id %}">View Profile</a>
+        </div>
+      {% empty %}
+        <p>No mentors found. Be the first to sign up!</p>
+      {% endfor %}
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 SkillSwitch. All rights reserved.</p>
+  </footer>
+</body>
+</html>

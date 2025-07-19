@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sign Up as Mentor - SkillSwitch</title>
+  <link rel="stylesheet" href="{% static 'users/styles.css' %}" />
+  <style>
+    .feedback {
+      font-size: 14px;
+      margin-top: 4px;
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Become a Career Switch Mentor</h2>
+  <form method="post" id="signupForm">
+    {% csrf_token %}
+    
+    <label for="full_name">Full Name:</label>
+    <input type="text" id="full_name" name="full_name" required />
+
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required />
+    <span id="emailFeedback" class="feedback"></span>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required />
+
+    <label for="confirmPassword">Confirm Password:</label>
+    <input type="password" id="confirmPassword" required />
+    <span id="passwordFeedback" class="feedback"></span>
+
+    <label for="background">Your Previous Background:</label>
+    <input type="text" id="background" name="background" placeholder="e.g., BSc Chemistry" required />
+
+    <label for="current_role">Your Current Role:</label>
+    <input type="text" id="current_role" name="current_role" placeholder="e.g., Data Analyst at TCS" required />
+
+    <label for="linkedin">LinkedIn Profile (Optional):</label>
+    <input type="url" id="linkedin" name="linkedin" />
+
+    <label for="bio">Short Bio:</label>
+    <textarea id="bio" name="bio" placeholder="Your story in 3-4 lines" required></textarea>
+
+    <label for="offers_mentoring">Would you like to offer 1:1 mentoring?</label>
+    <select id="offers_mentoring" name="offers_mentoring">
+      <option value="Yes">Yes</option>
+      <option value="No">No</option>
+    </select>
+
+    <button type="submit">Register</button>
+  </form>
+
+  <script>
+    const email = document.getElementById('email');
+    const emailFeedback = document.getElementById('emailFeedback');
+
+    const password = document.getElementById('password');
+    const confirmPassword = document.getElementById('confirmPassword');
+    const passwordFeedback = document.getElementById('passwordFeedback');
+
+    email.addEventListener('input', () => {
+      const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (regex.test(email.value)) {
+        emailFeedback.textContent = "✅ Valid Email";
+        emailFeedback.style.color = "green";
+      } else {
+        emailFeedback.textContent = "❌ Invalid Email";
+        emailFeedback.style.color = "red";
+      }
+    });
+
+    confirmPassword.addEventListener('input', () => {
+      if (password.value === confirmPassword.value) {
+        passwordFeedback.textContent = "✅ Passwords match";
+        passwordFeedback.style.color = "green";
+      } else {
+        passwordFeedback.textContent = "❌ Passwords do not match";
+        passwordFeedback.style.color = "red";
+      }
+    });
+  </script>
+</body>
+</html>

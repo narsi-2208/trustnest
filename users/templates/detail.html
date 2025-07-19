@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>{{ mentor.full_name }} - Mentor Profile | SkillSwitch</title>
+  <link rel="stylesheet" href="{% static 'users/styles.css' %}" />
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f5f5f5;
+      padding: 20px;
+    }
+
+    .profile {
+      max-width: 700px;
+      margin: auto;
+      background: white;
+      padding: 24px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    p {
+      margin-bottom: 10px;
+    }
+
+    a.back {
+      display: inline-block;
+      margin-top: 20px;
+      text-decoration: none;
+      color: #007bff;
+    }
+  </style>
+</head>
+<body>
+  <div class="profile">
+    <h2>{{ mentor.full_name }}</h2>
+    <p><strong>Previous Background:</strong> {{ mentor.background }}</p>
+    <p><strong>Current Role:</strong> {{ mentor.current_role }}</p>
+    <p><strong>Bio:</strong> {{ mentor.bio }}</p>
+    <p><strong>1:1 Mentoring Available:</strong> {{ mentor.offers_mentoring|yesno:"Yes,No" }}</p>
+    {% if mentor.linkedin %}
+      <p><strong>LinkedIn:</strong> <a href="{{ mentor.linkedin }}" target="_blank">{{ mentor.linkedin }}</a></p>
+    {% endif %}
+    <a class="back" href="{% url 'index' %}">&larr; Back to mentor listings</a>
+  </div>
+</body>
+</html>
